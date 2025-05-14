@@ -1,0 +1,66 @@
+int LA=6;
+int LB=7;
+int RA=8;
+int RB=9; //this four are dc motor right and left
+void setup() {
+  
+  Serial.begin(9600);
+  pinMode(LA, OUTPUT);
+  pinMode(LB, OUTPUT);
+  pinMode(RA, OUTPUT);
+  pinMode(RB, OUTPUT); //motor make as output
+}
+  void Forward(){
+  digitalWrite(LA, HIGH);
+  digitalWrite(LB, LOW);
+  digitalWrite(RA, HIGH);
+  digitalWrite(RB, LOW); //function to move forward
+  }
+
+  void Backward(){
+  digitalWrite(LA, LOW);
+  digitalWrite(LB, HIGH);
+  digitalWrite(RA, LOW);
+  digitalWrite(RB, HIGH); //function to move backward
+  }
+
+  void Stop(){
+  digitalWrite(LA, LOW);
+  digitalWrite(LB, LOW);
+  digitalWrite(RA, LOW);
+  digitalWrite(RB, LOW); //function to stop the motors
+  }
+
+  void Right(){
+  digitalWrite(LA, LOW);
+  digitalWrite(LB, HIGH);
+  digitalWrite(RA, HIGH);
+  digitalWrite(RB, LOW); //function to move right side
+
+  }
+
+  void Left(){
+  digitalWrite(LA, HIGH);
+  digitalWrite(LB, LOW);
+  digitalWrite(RA, LOW);
+  digitalWrite(RB, HIGH); //function to move left side
+  }
+void loop() {
+  // put your main code here, to run repeatedly:
+  while(Serial.available()){ //loop of serial data
+  char x=Serial.read(); // read values from serial monitor
+  Serial.print(x);
+  if  (x=='w'){
+    Forward(); //pressing w by forward function
+  }
+  else if(x=='s'){
+    Backward(); //pressing s by backward function
+  }
+   else if(x=='d'){
+    Right(); //pressing d by right function
+  }
+   else if(x=='s'){
+    Left(); //pressing s by left function
+  }
+  }
+}
